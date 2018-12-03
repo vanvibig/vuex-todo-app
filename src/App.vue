@@ -1,11 +1,58 @@
-<template>
-	<div>
-		<h1>Todo app <small>using Vuex</small></h1>
+<template class="row">
+	<div class="container col-8">
+		<h1>Todo app
+			<small>using Vuex</small>
+		</h1>
+		<form @submit="createTodo" autocomplete="off">
+			<label for="title">Title</label>
+			<input
+							v-model="title"
+							id="title" type="text" class="form-control" required>
+			<label for="description">Description</label>
+			<textarea
+							v-model="description"
+							id="description"
+							class="form-control"
+							rows="2"
+							required></textarea>
+			<br>
+			<button class="btn btn-success" type="submit">Submit</button>
+		</form>
+		<br>
+		<hr>
+		<div class="row">
+			<div class="col-6">
+				<h4 class="text-center">Completed</h4>
+				<todo-list :completed="true"></todo-list>
+			</div>
+			<div class="col-6">
+				<h4 class="text-center">Pending</h4>
+				<todo-list :completed="false"></todo-list>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
-    export default {}
+
+    import TodoList from "./components/TodoList";
+
+    export default {
+        name: 'app',
+        components: {TodoList},
+        data() {
+            return {
+                title: '',
+                description: ''
+            }
+        },
+        methods: {
+            createTodo(e) {
+                e.preventDefault();
+                alert(`This.title: ${this.title}`);
+            }
+        }
+    }
 </script>
 
 <style lang="scss">
