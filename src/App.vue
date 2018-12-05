@@ -1,8 +1,10 @@
 <template class="row">
 	<div class="container col-8">
-		<h1>Todo app
+		<h1 class="d-flex justify-content-center">
+			<span>Todo app</span>
 			<small>using Vuex</small>
 		</h1>
+
 		<form @submit="createTodo" autocomplete="off">
 			<label for="title">Title</label>
 			<input
@@ -49,7 +51,8 @@
         methods: {
             createTodo(e) {
                 e.preventDefault();
-                alert(`This.title: ${this.title}`);
+                this.$store.dispatch('ADD_TODO', this);
+                this.title = this.description = '';
             }
         }
     }

@@ -28,7 +28,22 @@ export default new Vuex.Store({
             },
         ]
     },
-    actions: {},
+    actions: {
+        ADD_TODO({commit}, todo) {
+            let newTodo = {
+                title: todo.title,
+                description: todo.description,
+                status: false
+            };
+            commit('ADD_TODO_MUTATION', newTodo);
+        },
+        COMPLETE_TODO({commit}, todo) {
+            commit('COMPLETE_TODO_MUTATION', todo);
+        },
+        DELETE_TODO({commit}, todo) {
+            commit('DELETE_TODO_MUTATION', todo);
+        },
+    },
     getters: {
         completed: (state) => {
             return state.todos.filter(todo => todo.status);
@@ -37,5 +52,21 @@ export default new Vuex.Store({
             return state.todos.filter(todo => !todo.status);
         }
     },
-    mutations: {}
+    mutations: {
+        ADD_TODO_MUTATION(state, todo) {
+            state.todos.push(todo);
+        },
+        COMPLETE_TODO_MUTATION(state, todo) {
+            let todoEl = state.todos.find(
+                item => item.title + item.description === todo.title + todo.description
+            );
+            todoEl.status = true;
+        },
+        DELETE_TODO_MUTATION(state, todo) {
+            let todoElIndex = state.todos.findIndex(
+                item => item.title + item.description === todo.title + todo.description
+            );
+            state.todos.splice(todoElIndex, 1);
+        }
+    }
 });
