@@ -57,6 +57,7 @@
                 e.preventDefault();
                 this.ADD_TODO(this);
                 this.title = this.description = '';
+                console.log(this.$store.getters['todo/completed']);
             }
         }
     }
