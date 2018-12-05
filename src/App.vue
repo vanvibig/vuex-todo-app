@@ -51,13 +51,13 @@
         },
         methods: {
             ...mapActions('todo',[
-                'ADD_TODO'
+                'addTodo'
 						]),
             createTodo(e) {
                 e.preventDefault();
-                this.ADD_TODO(this);
+                this.addTodo(this);
                 this.title = this.description = '';
-                console.log(this.$store.getters['todo/completed']);
+                console.log(this.$store.getters['todo/completedTodo']);
             }
         }
     }

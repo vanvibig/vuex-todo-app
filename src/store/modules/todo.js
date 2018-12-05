@@ -26,44 +26,44 @@ const state = {
 
 // getters
 const getters = {
-    completed: (state) => {
+    completedTodo: (state) => {
         return state.todos.filter(todo => todo.status);
     },
-    incompleted: (state) => {
+    incompletedTodo: (state) => {
         return state.todos.filter(todo => !todo.status);
     }
 };
 
 // actions
 const actions = {
-    ADD_TODO({commit}, todo) {
+    addTodo({commit}, todo) {
         let newTodo = {
             title: todo.title,
             description: todo.description,
             status: false
         };
-        commit('ADD_TODO_MUTATION', newTodo);
+        commit('ADD_TODO', newTodo);
     },
-    COMPLETE_TODO({commit}, todo) {
-        commit('COMPLETE_TODO_MUTATION', todo);
+    completeTodo({commit}, todo) {
+        commit('COMPLETE_TODO', todo);
     },
-    DELETE_TODO({commit}, todo) {
-        commit('DELETE_TODO_MUTATION', todo);
+    deleteTodo({commit}, todo) {
+        commit('DELETE_TODO', todo);
     },
 };
 
 // mutations
 const mutations = {
-    ADD_TODO_MUTATION(state, todo) {
+    ADD_TODO(state, todo) {
         state.todos.push(todo);
     },
-    COMPLETE_TODO_MUTATION(state, todo) {
+    COMPLETE_TODO(state, todo) {
         let todoEl = state.todos.find(
             item => item.title + item.description === todo.title + todo.description
         );
         todoEl.status = true;
     },
-    DELETE_TODO_MUTATION(state, todo) {
+    DELETE_TODO(state, todo) {
         let todoElIndex = state.todos.findIndex(
             item => item.title + item.description === todo.title + todo.description
         );

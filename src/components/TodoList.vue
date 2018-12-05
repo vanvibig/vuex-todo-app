@@ -20,15 +20,15 @@
             completed: Boolean
         },
         computed: {
-            ...mapGetters('todo', {
-                completedTodos: 'completed',
-                incompletedTodos: 'incompleted'
-            }),
+            ...mapGetters('todo', [
+                'completedTodo',
+                'incompletedTodo'
+            ]),
             todosFilterd() {
                 if (this.completed) {
-                    return this.completedTodos;
+                    return this.completedTodo;
                 }
-                return this.incompletedTodos;
+                return this.incompletedTodo;
             }
         },
     }

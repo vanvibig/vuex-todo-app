@@ -4,12 +4,12 @@
 		<div class="card-body">{{todo.description}}</div>
 		<div class="card-footer d-flex justify-content-center">
 			<button
-							@click="completedTodo"
+							@click="completeTodo(todo)"
 							v-if="!todo.status"
 							class="btn btn-success mr-2">Mark as Completed
 			</button>
 			<button
-							@click="deleteTodo"
+							@click="deleteTodo(todo)"
 							class="btn btn-danger">Delete
 			</button>
 		</div>
@@ -25,15 +25,9 @@
         },
         methods: {
             ...mapActions('todo',[
-                'COMPLETE_TODO',
-								'DELETE_TODO'
+                'completeTodo',
+								'deleteTodo'
 						]),
-            completedTodo() {
-                this.COMPLETE_TODO(this.todo);
-            },
-            deleteTodo() {
-                this.DELETE_TODO(this.todo);
-            },
         }
     }
 </script>
