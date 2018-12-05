@@ -10,23 +10,29 @@
 			</button>
 			<button
 							@click="deleteTodo"
-							class="btn btn-danger">Delete</button>
+							class="btn btn-danger">Delete
+			</button>
 		</div>
 	</div>
 </template>
 
 <script>
+    import {mapActions} from 'vuex';
     export default {
         name: "todo-item",
         props: {
             todo: {title: String, description: String}
         },
         methods: {
+            ...mapActions('todo',[
+                'COMPLETE_TODO',
+								'DELETE_TODO'
+						]),
             completedTodo() {
-                this.$store.dispatch('COMPLETE_TODO', this.todo);
+                this.COMPLETE_TODO(this.todo);
             },
             deleteTodo() {
-                this.$store.dispatch('DELETE_TODO', this.todo);
+                this.DELETE_TODO(this.todo);
             },
         }
     }

@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<div v-if="todos">
+		<div v-if="todosFilterd">
 			<todo-item
-							v-for="(todo, index) in todos"
+							v-for="(todo, index) in todosFilterd"
 							:key="index"
 							:todo="todo"></todo-item>
 		</div>
@@ -11,6 +11,7 @@
 
 <script>
     import TodoItem from "./TodoItem";
+    import {mapGetters} from 'vuex';
 
     export default {
         name: "todo-list",
@@ -19,13 +20,17 @@
             completed: Boolean
         },
         computed: {
-            todos() {
+            ...mapGetters('todo', {
+                completedTodos: 'completed',
+                incompletedTodos: 'incompleted'
+            }),
+            todosFilterd() {
                 if (this.completed) {
-                    return this.$store.getters.completed;
+                    return this.completedTodos;
                 }
-                return this.$store.getters.incompleted;
+                return this.incompletedTodos;
             }
-        }
+        },
     }
 </script>
 

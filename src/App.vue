@@ -38,6 +38,7 @@
 <script>
 
     import TodoList from "./components/TodoList";
+    import {mapActions} from 'vuex';
 
     export default {
         name: 'app',
@@ -49,9 +50,12 @@
             }
         },
         methods: {
+            ...mapActions('todo',[
+                'ADD_TODO'
+						]),
             createTodo(e) {
                 e.preventDefault();
-                this.$store.dispatch('ADD_TODO', this);
+                this.ADD_TODO(this);
                 this.title = this.description = '';
             }
         }
